@@ -1,0 +1,96 @@
+body{
+  background-color: #f5f5f5 !important;
+}
+.form{
+  display: flex;
+  justify-content: center;
+}
+
+.username-input{
+  width: 250px !important;
+  margin-right: 10px;
+}
+
+.generate-button{
+  width: 100px !important;
+}
+
+.results{
+  border: 1px solid #ebebeb;
+  padding: 25px;
+  background-color: #fff;
+  border-radius: 5px;
+  margin-bottom: 50px;
+}
+
+.result-header img {
+  width: 80px;
+  height: 80px;
+  display: inline-block;
+  object-fit: cover;
+  vertical-align: -10px;
+  margin-right: 10px;
+  float: left;
+  border-radius: 56px;
+}
+
+.result-header h1{
+  display: inline-block;
+}
+
+.fields>div {
+  display: flex;
+  align-items: flex-start;
+  border-bottom: 1px solid #ebebeb;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+}
+
+.fields>div>*:first-child {
+  width: 25%;
+  font-size: 20px;
+  font-style: italic;
+}
+
+.fields>div>*:last-child {
+  width: 75%;
+}
+
+.progress-field:not(:last-child){
+  margin-bottom: 10px;
+}
+
+.progress-field .progress-bar{
+  min-width: 100px;
+}
+
+.repo{
+  padding: 15px 0;
+}
+
+.repo:not(:last-child){
+  border-bottom: 1px solid #ebebeb;
+}
+
+.repo a{
+  text-decoration: none;
+}
+
+.repo-year{
+  float: right;
+  position: relative;
+  bottom: 35px;
+  font-style: italic;
+  font-size: 15px;
+  color: #757575;
+}
+
+.repo-detail>div>i{
+  font-size: 16px;
+  color: #5c7aa6;
+  margin-right: 5px;
+  vertical-align: -3px;
+}
+.repo-detail>div>i:last-child{
+  margin-left: 25px;
+}
