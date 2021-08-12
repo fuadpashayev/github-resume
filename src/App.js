@@ -36,6 +36,7 @@ class App extends Component {
           isFetching: false,
           languages
         });
+        document.title = 'Resume - ' + (user.name || user.userName);
       }).catch(error => {
         this.setState({
           isFetching: false
