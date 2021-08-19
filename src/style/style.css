@@ -1,96 +1,253 @@
-body{
+* {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
   background-color: #f5f5f5 !important;
 }
-.form{
+
+.link {
+  color: #d66f56;
+  font-size: 14px;
+}
+
+.link-dark {
+  color: #c83e1e;
+  font-size: 16px;
+}
+
+.logo {
+  height: 60px;
   display: flex;
+  align-items: center;
   justify-content: center;
+  padding: 5px 0;
 }
 
-.username-input{
-  width: 250px !important;
+.logo img {
+  height: 30px;
+}
+
+.container {
+  background: #c73a18;
+  padding: 50px calc(5vw + 5vh + 5%);
+  position: relative;
+}
+
+.header {
+  font-size: 40px;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.header.header-white {
+  color: #fff;
+}
+
+.header.header-black {
+  color: #222;
+}
+
+.header:before {
+  width: 25px;
+  height: 5px;
+  content: ' ';
+  position: absolute;
+  top: -15px;
+  left: 2px;
+}
+
+.header.header-white:before {
+  border-bottom: 4px solid #fff;
+}
+
+.header.header-black:before {
+  border-bottom: 4px solid #222;
+}
+
+.header div {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: -15px;
+}
+
+.header a {
+  font-size: 12px;
+}
+
+.form {
+  margin-top: 40px;
+}
+
+.form-header {
+  font-size: 20px;
+  color: #fff;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.username-input {
+  width: 70%;
   margin-right: 10px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #bbbbbb;
+  background: #c73a18;
+  color: #cecece;
+  padding: 5px 0px;
 }
 
-.generate-button{
-  width: 100px !important;
+.generate-button {
+  width: calc(30% - 10px);
+  padding: 5px 0;
+  outline: none;
+  border: none;
+  background: whitesmoke;
+  color: #c73a18;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 330ms;
 }
 
-.results{
-  border: 1px solid #ebebeb;
-  padding: 25px;
-  background-color: #fff;
-  border-radius: 5px;
-  margin-bottom: 50px;
+.generate-button:hover {
+  background: #cbcbcb;
+  color: #c73a18;
+}
+
+.results {
+  padding: 50px 0;
+}
+
+.results > div:not(.header) {
+  padding: 50px calc(5vw + 5vh + 5%);
+}
+
+.results > .header {
+  padding: 0 calc(5vw + 5vh + 5%);
+}
+
+.results > .header:before {
+  left: calc(5vw + 5vh + 5% + 2px);
+}
+
+.fields {
+  margin-top: 60px;
+}
+
+.result-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .result-header img {
   width: 80px;
   height: 80px;
-  display: inline-block;
-  object-fit: cover;
-  vertical-align: -10px;
   margin-right: 10px;
-  float: left;
   border-radius: 56px;
 }
 
-.result-header h1{
+.result-header h1 {
   display: inline-block;
 }
 
-.fields>div {
-  display: flex;
-  align-items: flex-start;
-  border-bottom: 1px solid #ebebeb;
-  padding-bottom: 15px;
-  margin-bottom: 25px;
+.language-field {
+  margin-bottom: 50px;
 }
 
-.fields>div>*:first-child {
-  width: 25%;
-  font-size: 20px;
-  font-style: italic;
+.language-field > div {
+  width: calc(25% - 15px);
+  display: inline-block;
+  margin: 10px 7.5px;
 }
 
-.fields>div>*:last-child {
-  width: 75%;
+.language-field > div:first-child {
+  margin: 10px 0;
 }
 
-.progress-field:not(:last-child){
+.progress-title {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.progress-area {
+  width: 100%;
+  background-color: #ebebeb;
+  height: 5px;
+  border-radius: 3px;
+}
+
+.progress-bar {
+  background-color: #64666d;
+  height: 100%;
+}
+
+.progress-field:not(:last-child) {
   margin-bottom: 10px;
 }
 
-.progress-field .progress-bar{
+.progress-field .progress-bar {
   min-width: 100px;
 }
 
-.repo{
+.small-info {
+  margin-top: 15px;
+}
+
+.repo {
   padding: 15px 0;
 }
 
-.repo:not(:last-child){
+.repo-light {
+  background-color: #fff;
+}
+
+.repo-dark {
+  background-color: #efeff0;
+}
+
+.repo:not(:last-child) {
   border-bottom: 1px solid #ebebeb;
 }
 
-.repo a{
+.repo a {
   text-decoration: none;
 }
 
-.repo-year{
-  float: right;
+.repo-header {
   position: relative;
-  bottom: 35px;
-  font-style: italic;
-  font-size: 15px;
-  color: #757575;
 }
 
-.repo-detail>div>i{
-  font-size: 16px;
-  color: #5c7aa6;
-  margin-right: 5px;
-  vertical-align: -3px;
+.repo-detail {
+  margin-top: 20px;
 }
-.repo-detail>div>i:last-child{
-  margin-left: 25px;
+
+.repo-year {
+  float: right;
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-style: italic;
+  font-size: 16px;
+  color: #000000;
+}
+
+.footer {
+  border-top: 1px solid #ebebeb;
+  text-align: center;
+  padding: 15px 0;
+  margin: 0 75px;
+}
+
+.loader {
+  position: absolute;
+  width: 75px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  bottom: 15px;
+  color: #fff;
 }

@@ -34,7 +34,8 @@ class App extends Component {
           repos,
           user,
           isFetching: false,
-          languages
+          languages,
+          query: ''
         });
         document.title = 'Resume - ' + (user.name || user.userName);
       }).catch(error => {
@@ -54,75 +55,78 @@ class App extends Component {
     let user = this.state.user;
     return (
       <div className="App">
-        <div className="container">
-          <div className="row py-5 justify-content-center">
-            <div className="col-6">
-              <div className="row">
-                <div className="form">
-                  <input
-                    className="form-control username-input"
-                    placeholder="Enter Github username"
-                    value={this.state.query}
-                    onChange={e => this.setState({query: e.target.value})}
-                    />
-                  <button
-                    className="form-control btn btn-success generate-button"
-                    onClick={this.generate}
-                    >Generate</button>
-                </div>
-                {this.state.isFetching && <div className="text-center mt-2">Loading ...</div>}
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-12">
-              {this.state.user && 
-                <div className="results">
-                  <div className="result-header">
-                      <img src={user.avatarUrl} alt="" />
-                      <h1>{user.name || user.userName}</h1>
-                      <div><em>Github {user.type}</em></div>
-                      <hr />
-                  </div>
-                  <div className="fields">
-                    <div>
-                      <span>Github Profile</span>
-                      <span><a href={user.profileUrl}>{user.name}</a> joined Github on {user.createdAt} and has <a href={user.profileUrl + '?tab=repositories'}>{user.repos} public repositories</a>.</span>
-                    </div>
-                    <div>
-                      <span>Languages</span>
-                      <div>
-                        {Object.keys(this.state.languages).map(language => {
-                          let allCount = eval(Object.values(this.state.languages).join('+'));
-                          let count = this.state.languages[language];
-                          let percentage = Math.floor(count / allCount * 100);
-                          return <ProgressBar key={language} label={language} value={percentage}/>;
-                        })}
-                      </div>
-                    </div>
-                    <div>
-                      <span>Public Repositories</span>
-                      <div>
-                        {this.state.repos.map(repo => 
-                          <div key={repo.name} className="repo">
-                            <div className="repo-header">
-                              <a href={repo.url}><h5>{repo.name}</h5></a>
-                              <small>{repo.language ? repo.language + ' - ' : ''}{repo.owner.login === user.userName ? 'Owner' : 'Contributor'}</small>
-                              <div className="repo-year">{repo.createdAt}</div>
-                              <div className="repo-detail">
-                                <div><i className="material-icons">mediation</i> {repo.forks}  <i className="material-icons">stars</i> {repo.stars}</div>
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              }
-            </div>
-          </div>
+        <div className="logo">
+          <img src="/logo.png" alt="Endava Logo" />
         </div>
+        <div className="container">
+          <div className="header header-white">
+            MY GITHUB RESUME
+          </div>
+          <div className="form">
+            <label htmlFor="username" className="form-header">GITHUB USERNAME</label>
+            <input
+              id="username"
+              className="username-input"
+              value={this.state.query}
+              onChange={e => this.setState({query: e.target.value})}
+              onKeyDown={e => e.keyCode === 13 && this.generateButton.click()}
+              />
+            <button
+              className="generate-button"
+              ref={generateButton => this.generateButton = generateButton}
+              onClick={this.generate}
+            >GENERATE</button>
+          </div>
+          {this.state.isFetching && <div className="loader">Loading ...</div>}
+        </div>
+
+
+        <div className="results">
+          {this.state.user && 
+            <>
+              <div>
+                <div className="header header-black">
+                  {user.displayName}
+                  <div>A PASSIONATE GITHUB USER</div>
+                  <a href={user.profileUrl} className="link">{user.profileUrl}</a>
+                </div>
+                <div className="result-header">
+                    <img src={user.avatarUrl} alt={`${user.displayName} - profile`} />
+                    <p className="small-info">
+                      On GitHub since {user.createdAt}, {user.displayName} is a developer {user.location ? `based in ${user.location}` : ''} with <a href={user.profileUrl + '?tab=repositories'} className="link">{user.repos} public repositories</a> and <a href={user.profileUrl + '?tab=followers'} className="link">{user.followers} followers</a>
+                    </p>
+                </div>
+                <div className="fields">
+                  <div className="header header-black">Languages</div>
+                  <div className="language-field">
+                    {Object.keys(this.state.languages).map(language => {
+                      let allCount = eval(Object.values(this.state.languages).join('+'));
+                      let count = this.state.languages[language];
+                      let percentage = Math.floor(count / allCount * 100);
+                      return <ProgressBar key={language} label={language} value={percentage}/>;
+                    })}
+                  </div>
+                </div>
+              </div>
+              <div className="header header-black">Popular Repositories</div>
+                {this.state.repos.map((repo, index) => 
+                  <div key={repo.name} className={`repo repo-${index % 2 ? 'light' : 'dark'}`}>
+                    <div className="repo-header">
+                      <h5><a href={repo.url} className="link-dark">{repo.name}</a></h5>
+                      <small>{repo.language ? repo.language + ' - ' : ''}{repo.owner.login === user.userName ? 'Owner' : 'Contributor'}</small>
+                      <p className="small-info">{repo.description}</p>
+                      <div className="repo-year">{repo.createdAt}{repo.createdAt !== repo.updatedAt ? `- ${repo.updatedAt}` : ''}</div>
+                      <div className="repo-detail">
+                        This repository has {repo.stars} stars and {repo.forks} forks. If you would like more information about this repository and my contributed code, please visit <a href={repo.url} className="link">[the repo]</a> on GitHub.
+                      </div>
+                    </div>
+                  </div>
+                )}
+            </>
+          }
+        </div>
+
+        <div className="footer">© endava 2021</div>
       </div>
     );
   }
