@@ -126,7 +126,7 @@ class App extends Component {
           }
         </div>
 
-        <div className="footer">© endava 2021</div>
+        <div className="footer">© Fuad Pashayev 2021</div>
       </div>
     );
   }
